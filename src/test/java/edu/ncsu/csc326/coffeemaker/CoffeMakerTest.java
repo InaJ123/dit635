@@ -35,12 +35,10 @@ public class CoffeMakerTest {
 
     @Test
     @DisplayName("Description: This tests checks that a recipe is added to the list of recipes." +
-                 "Purpose: Verifying that when a user adds a recipe it is saved and stored in the recipe book.")
+                 "Purpose: Verifying with boolean when a user adds a recipe it is and stored in the recipe book.")
     public void TestAddRecipe() {
-        cm.addRecipe(r1);
-        Recipe recipes[] = cm.getRecipes();
-        assertEquals(r1, recipes[0]);
-
+        Boolean addRecipe = rb.addRecipe(r1);
+        assertEquals(true, addRecipe);
     }
 
     @Test
