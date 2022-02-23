@@ -16,6 +16,7 @@ public class CoffeMakerTest {
     private CoffeeMaker cm;
     private Recipe r1;
     private RecipeBook rb;
+    private Recipe r2;
 
     @Before
     public void setUp() throws Exception {
@@ -30,6 +31,15 @@ public class CoffeMakerTest {
         r1.setAmtMilk("1");
         r1.setAmtSugar("1");
         r1.setPrice("40");
+
+        r2 = new Recipe();
+        r2.setName("Chocolate");
+        r2.setAmtChocolate("0");
+        r2.setAmtCoffee("3");
+        r2.setAmtMilk("1");
+        r2.setAmtSugar("1");
+        r2.setPrice("50");
+
 
     }
 
@@ -61,10 +71,15 @@ public class CoffeMakerTest {
 
     @Test
     @DisplayName("Description: This test checks that recipe is edited." +
-                 "Purpose: Confirms that a recipe is edited by returning the name of the edited recipe.")
+                 "Purpose: Confirm that a recipe is edited by returning the name of the edited recipe.")
     public void TestEditRecipe() {
         cm.addRecipe(r1);
-        assertEquals(r1.getName(), cm.editRecipe(0, r1));
+        Recipe recipe = new Recipe();
+        recipe.setName("hi");
+        Recipe[] recipes = new Recipe[4];
+        cm.editRecipe(0, r2);
+        recipes[0] = recipe;
+        assertEquals(r1, cm.getRecipes()[0]);
 
     }
     @Test
