@@ -79,7 +79,28 @@ public class RecipeTest {
 
         }
     }
+    @Test // Test nr 3.1 - problem 2 branch coverage
+    public void testSetPriceBranchCoverage() {
+        try {
+            r1.setPrice("-1");
+            check.assertEquals(-1, r1.getPrice());
+            System.out.println(r1.getPrice());
+        } catch (RecipeException e) {
+            check.fail("A recipe exception occurred");
 
+        }
+    }
+    @Test // Test nr 3.2 - problem 2 branch coverage
+    public void testSetPriceBranchCoverage2() {
+        try {
+            r1.setPrice("c");
+            check.assertEquals("c", r1.getPrice());
+            System.out.println(r1.getPrice());
+        } catch (RecipeException e) {
+            check.fail("A recipe exception occurred");
+
+        }
+    }
     @Test // Test nr 3.5 - test price no input
     public void testPriceNoInput(){
         check.assertThrows(RecipeException.class, () -> r1.setPrice(""));

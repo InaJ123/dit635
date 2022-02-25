@@ -17,6 +17,7 @@ public class CoffeMakerTest {
     private Recipe r1;
     private RecipeBook rb;
     private Recipe r2;
+    private Recipe r3;
 
     @Before
     public void setUp() throws Exception {
@@ -40,7 +41,13 @@ public class CoffeMakerTest {
         r2.setAmtSugar("1");
         r2.setPrice("50");
 
-
+        r3 = new Recipe();
+        r3.setName("Chocolate");
+        r3.setAmtChocolate("20");
+        r3.setAmtCoffee("30");
+        r3.setAmtMilk("17");
+        r3.setAmtSugar("30");
+        r3.setPrice("50");
     }
 
     @Test
@@ -128,6 +135,22 @@ public class CoffeMakerTest {
         cm.addRecipe(r1);
         cm.makeCoffee(0,50);
         assertEquals(10, cm.makeCoffee(0, 50));
+
+    }
+
+    @Test
+    public void TestMakeCoffeeBranchCoverage() {
+        cm.addRecipe(r1);
+        cm.makeCoffee(0,30);
+        assertEquals(30, cm.makeCoffee(0, 30));
+
+    }
+
+    @Test
+    public void TestMakeCoffeeBranchCoverage2() {
+        cm.addRecipe(r3);
+        cm.makeCoffee(0,50);
+        assertEquals(50, cm.makeCoffee(0, 50));
 
     }
     @Test
