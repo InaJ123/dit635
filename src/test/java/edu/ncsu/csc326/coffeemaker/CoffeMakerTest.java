@@ -51,16 +51,19 @@ public class CoffeMakerTest {
     }
 
     @Test
-    @DisplayName("Description: This tests checks that a recipe is added to the list of recipes." +
-                 "Purpose: Verifying with boolean when a user adds a recipe it is and stored in the recipe book.")
     public void TestAddRecipe() {
         Boolean addRecipe = rb.addRecipe(r1);
         assertEquals(true, addRecipe);
     }
 
     @Test
-    @DisplayName("Description: This test checks that recipe is deleted upon request." +
-                 "Purpose: Verifying that a recipe is deleted according to user input")
+    public void TestAddRecipeTwice() {
+        Recipe[] recipes = cm.getRecipes();
+        cm.addRecipe(r1);
+        assertFalse(cm.addRecipe(r1));
+    }
+
+    @Test
     public void TestDeleteRecipe() {
         cm.addRecipe(r1);
         String expected = r1.getName();
@@ -69,16 +72,12 @@ public class CoffeMakerTest {
     }
 
     @Test
-    @DisplayName("Description: This test checks output of deleting recipe that does not exist." +
-                "Purpose: Verify that upon deleting non-existing recipe, output should be null. ")
     public void TestDeleteRecipeNull() {
         assertEquals(null, cm.deleteRecipe(0));
 
     }
 
     @Test
-    @DisplayName("Description: This test checks that recipe is edited." +
-                 "Purpose: Confirm that a recipe is edited by returning the name of the edited recipe.")
     public void TestEditRecipe() {
         cm.addRecipe(r1);
         Recipe recipe = new Recipe();
@@ -90,16 +89,12 @@ public class CoffeMakerTest {
 
     }
     @Test
-    @DisplayName("Description: This test checks output of editing non-existing recipe." +
-                 "Purpose: Checks that upon trying to edit a non-existing recipe, null should be the output.")
     public void TestEditRecipeNotExisting() {
         assertEquals(null, cm.editRecipe(0, r1));
 
     }
 
     @Test
-    @DisplayName("Description: This test checks that coffee, milk, sugar and chocolate can be added to inventory." +
-                 "Purpose: Checks that inventory is updated with new values.")
     public void TestAddInventory() {
         try {
             cm.addInventory("3", "6", "0", "10");
@@ -111,8 +106,6 @@ public class CoffeMakerTest {
 
     }
     @Test
-    @DisplayName("Description: This test checks what happens upon attempting to add negative numbers to inventory." +
-                 "Purpose: Checks error handling upon entering negative numbers.")
     public void testAddNegativeNumbersInventory() {
         assertThrows(InventoryException.class, () ->
         {
@@ -121,16 +114,12 @@ public class CoffeMakerTest {
     }
 
     @Test
-    @DisplayName("Description: This test checks inventory." +
-                 "Purpose: Verify that inventory returns correct numbers.")
     public void TestCheckInventory() {
         String expected = "Coffee: 15\nMilk: 15\nSugar: 15\nChocolate: 15\n";
         assertEquals(expected, cm.checkInventory());
     }
 
     @Test
-    @DisplayName("Description: This test checks that user can buy coffee." +
-                 "Purpose: Verify that user can buy coffee and get correct change back.")
     public void TestMakeCoffee() {
         cm.addRecipe(r1);
         cm.makeCoffee(0,50);
@@ -153,12 +142,27 @@ public class CoffeMakerTest {
         assertEquals(50, cm.makeCoffee(0, 50));
 
     }
+
     @Test
-    @DisplayName("Description: This tests purchase of coffee that does not exist." +
-                 "Purpose: Verify that user can not buy a coffee that does not exist and gets the change back.")
+    public void TestMakeCoffeeNegativeAmountPaid() {
+        cm.addRecipe(r1);
+        cm.makeCoffee(0,-10);
+        assertEquals(0, cm.makeCoffee(0, -10));
+
+    }
+    @Test
     public void TestMakeCoffeeNotExisting() {
         cm.makeCoffee(0,50);
         assertEquals(50, cm.makeCoffee(0, 50));
+
+    }
+
+    @Test
+    public void getRecipes() {
+        cm.addRecipe(r1);
+        Recipe[] recipes = new Recipe[4];
+        recipes[0] = r1;
+        assertArrayEquals(recipes, cm.getRecipes());
 
     }
 
