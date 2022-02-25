@@ -8,190 +8,253 @@ import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.Assert.*;
 
 public class RecipeTest {
     private Recipe r1;
     private Recipe r2;
-    private Assertions check;
 
     @Before
     public void setUp() throws RecipeException {
         r1 = new Recipe();
         //Set up for r1
-        r1.setName("Coffee");
+        r1.setName("name");
         r1.setAmtChocolate("0");
         r1.setAmtCoffee("3");
         r1.setAmtMilk("1");
         r1.setAmtSugar("1");
-        r1.setPrice("50");
+        r1.setPrice("66");
 
         r2 = new Recipe();
-        r1.setName("Chocolate");
-        r1.setAmtChocolate("0");
-        r1.setAmtCoffee("3");
-        r1.setAmtMilk("1");
-        r1.setAmtSugar("1");
-        r1.setPrice("50");
+        r2.setName("name");
+        r2.setAmtChocolate("0");
+        r2.setAmtCoffee("3");
+        r2.setAmtMilk("1");
+        r2.setAmtSugar("1");
+        r2.setPrice("66");
 
     }
 
-    @Test // Test nr 1 --> test for retrieving recipe
-    public void testGetRecipe() {
-        String recipe1 = r1.getName();
-        assertEquals("Coffee", recipe1);
-        System.out.println(recipe1);
+    @Test
+    public void checkChocolateIsPositive() {
+        assertThrows(RecipeException.class, () -> r1.setAmtChocolate(-1 + ""));
+    }
 
+    @Test
+    public void checkChocolateIsNotNull() {
+        assertThrows(RecipeException.class, () -> r1.setAmtChocolate("null"));
     }
 
 
-    @Test // Test nr 3 - Test if price of recipe can be edited
-    public void testSetRecipe() {
-        r1.setName("Caramel macchiato");
-        check.assertEquals("Caramel macchiato", r1.getName());
-        System.out.println(r1.getName());
+    @Test
+    public void checkSugarIsPositive() {
+        assertThrows(RecipeException.class, () -> r1.setAmtSugar(-1 + ""));
     }
 
-    @Test // Test nr 2.5 - Recipe no input
-    public void testRecipeNoInput(){
-        check.assertThrows(RecipeException.class, () -> r1.setPrice(""));
+    @Test
+    public void checkSugarIsNotNull() {
+        assertThrows(RecipeException.class, () -> r1.setAmtCoffee("null"));
     }
 
-    @Test // Test nr 2 -->  Test if the correct price was provided
+    @Test
+    public void checkCoffeeIsPositive() {
+        assertThrows(RecipeException.class, () -> r1.setAmtCoffee("-1"));
+    }
+
+    @Test
+    public void checkCoffeeIsNotNull() {
+        assertThrows(RecipeException.class, () -> r1.setAmtCoffee("null"));
+    }
+
+    @Test
+    public void testSetAmtCoffeeEmptyInput() {
+        assertThrows(RecipeException.class, () -> r1.setAmtCoffee(""));
+    }
+
+
+    @Test
     public void testGetPrice() {
-        int price1 = r1.getPrice();
-        assertEquals(50, price1);
-        System.out.println("Price is 50");
+        assertEquals(66, r1.getPrice());
 
     }
 
-    @Test // Test nr 3 - Test if price of recipe can be edited
+    @Test
+    public void checkPriceIsPositive() {
+        assertThrows(RecipeException.class, () -> r1.setPrice("-1"));
+    }
+
+
+    @Test
+    public void checkPriceIsNotString() {
+        assertThrows(RecipeException.class, () -> r1.setPrice("BC"));
+    }
+
+
+    @Test
     public void testSetPrice() {
         try {
-            r1.setPrice("66");
-            check.assertEquals(66, r1.getPrice());
+            r1.setPrice("50");
+            assertEquals(50, r1.getPrice());
             System.out.println(r1.getPrice());
         } catch (RecipeException e) {
-            check.fail("A recipe exception occurred");
-
+            fail("Recipe exception should not be thrown");
         }
     }
-    @Test // Test nr 3.1 - problem 2 branch coverage
-    public void testSetPriceBranchCoverage() {
-        try {
-            r1.setPrice("-1");
-            check.assertEquals(-1, r1.getPrice());
-            System.out.println(r1.getPrice());
-        } catch (RecipeException e) {
-            check.fail("A recipe exception occurred");
 
-        }
-    }
-    @Test // Test nr 3.2 - problem 2 branch coverage
-    public void testSetPriceBranchCoverage2() {
-        try {
-            r1.setPrice("c");
-            check.assertEquals("c", r1.getPrice());
-            System.out.println(r1.getPrice());
-        } catch (RecipeException e) {
-            check.fail("A recipe exception occurred");
-
-        }
-    }
-    @Test // Test nr 3.5 - test price no input
-    public void testPriceNoInput(){
-        check.assertThrows(RecipeException.class, () -> r1.setPrice(""));
+    @Test
+    public void testPriceNoInput() {
+        assertThrows(RecipeException.class, () -> r1.setPrice(""));
     }
 
-    @Test // Test nr 4 - Test if sugar can be retrieved
+    @Test
     public void testGetAmtSugar() {
-        check.assertEquals(1, r1.getAmtSugar());
+        assertEquals(1, r1.getAmtSugar());
 
     }
 
-    @Test // Test nr 5 - Test if sugar amount can be edited
+    @Test
     public void testSetAmtSugar() {
         try {
-            r1.setAmtSugar("10");
-            check.assertEquals(10, r1.getAmtSugar());
+            r1.setAmtSugar("6");
+            assertEquals(6, r1.getAmtSugar());
             System.out.println(r1.getAmtSugar());
         } catch (RecipeException e) {
-            check.fail("You have received a recipe exception");
+            fail("Recipe exception should not be thrown");
         }
 
     }
 
     @Test
-    public void testSetAmtSugarInvalid(){
-        check.assertThrows(RecipeException.class, () -> r1.setAmtSugar("Hehe"));
+    public void testSetAmtSugarInvalid() {
+        assertThrows(RecipeException.class, () -> r1.setAmtSugar("Hehe"));
     }
 
-    @Test  // Test nr 6 - Test if coffee can be retrieved
+    @Test
     public void testGetAmtCoffee() {
-        check.assertEquals(3, r1.getAmtCoffee());
+        assertEquals(3, r1.getAmtCoffee());
     }
 
-    @Test // Test nr 7.5 - Check if coffee has negative value
+    @Test
     public void testCoffeeIsNegative() {
-        check.assertThrows(RecipeException.class, () -> r1.setAmtCoffee(-1+""));
+        assertThrows(RecipeException.class, () -> r1.setAmtCoffee(-1 + ""));
     }
 
 
-    @Test // Test nr 7 - Test if coffee can be edited
+    @Test
     public void testSetAmtCoffee() {
         try {
-            r1.setAmtCoffee("2");
-            check.assertEquals(2, r1.getAmtCoffee());
+            r1.setAmtCoffee("4");
+            assertEquals(4, r1.getAmtCoffee());
             System.out.println(r1.getAmtCoffee());
         } catch (RecipeException e) {
-            check.fail("You have received a recipe exception");
+            fail("You have received a recipe exception");
         }
     }
 
 
-    @Test // Test nr 8 - test if amount chocolate can be retrieved
+    @Test
     public void testGetAmtChocolate() {
-        check.assertEquals(3, r1.getAmtCoffee());
+        assertEquals(3, r1.getAmtCoffee());
     }
 
 
-    @Test // Test nr 9 - test if amount of chocolate can be edited
+    @Test
     public void testSetAmtChocolate() {
         try {
             r1.setAmtChocolate("10");
-            check.assertEquals(10, r1.getAmtChocolate());
-            System.out.println(r1.getAmtChocolate());
+            assertEquals(10, r1.getAmtChocolate());
         } catch (RecipeException e) {
-            check.fail("You have received a recipe exception");
+            fail("You have received a recipe exception");
         }
     }
 
     @Test
-    public void testSetAmtChocolateInvalid(){
-        check.assertThrows(RecipeException.class, () -> r1.setAmtChocolate("Oops"));
+    public void testSetAmtChocolateInvalid() {
+        assertThrows(RecipeException.class, () -> r1.setAmtChocolate("ABC"));
     }
 
-    @Test // Test nr 10 - try retrieve amount of milk
+    @Test
+    public void testChocolateNoInput() {
+        assertThrows(RecipeException.class, () -> r1.setAmtChocolate(""));
+    }
+
+    @Test
     public void testGetAmtMilk() {
-        check.assertEquals(1, r1.getAmtMilk());
+        assertEquals(1, r1.getAmtMilk());
     }
 
-    @Test // Test nr 11 - try to edit amount of milk
+    @Test
     public void testSetAmtMilk() {
         try {
-            r1.setAmtMilk("1");
-            check.assertEquals(1, r1.getAmtMilk());
+            r1.setAmtMilk("6");
+            assertEquals(6, r1.getAmtMilk());
             System.out.println(r1.getAmtMilk());
         } catch (RecipeException e) {
-            check.fail("You have received a recipe exception");
+            fail("You have received a recipe exception");
         }
     }
 
-    @Test // Test nr 12 - Check if value is null
+    @Test
     public void testMilkIsNegative() {
-        check.assertThrows(RecipeException.class, () -> r1.setAmtMilk(-1+""));
+        assertThrows(RecipeException.class, () -> r1.setAmtMilk("-1"));
+    }
+
+    @Test
+    public void testMilkIsNoInput() {
+        assertThrows(RecipeException.class, () -> r1.setAmtMilk(""));
+    }
+
+    @Test
+    public void testSetName() {
+        r1.setName("name");
+        assertEquals("name", r1.getName());
+    }
+
+    @Test
+    public void testToString() {
+        assertEquals(r1.getName(), r1.toString());
+    }
+
+    @Test
+    public void testHashCode() {
+        assertTrue(r1.hashCode() == r2.hashCode());
+        assertTrue(r1.equals(r2) && r2.equals(r1));
+    }
+
+    @Test
+    public void testEqualsValid() throws RecipeException {
+
+        Recipe r3 = new Recipe();
+        r3.setName("name");
+        r3.setAmtChocolate("0");
+        r3.setAmtCoffee("3");
+        r3.setAmtMilk("1");
+        r3.setAmtSugar("1");
+        r3.setPrice("66");
+        assertEquals(r1, r3);
+
+        r2 = r1;
+        assertEquals(r1, r2);
+    }
+
+    @Test
+    public void testEqualsNull() {
+        r2 = null;
+        assertFalse(r1.equals(r2));
+    }
+
+    @Test
+   public void testEqualsReturnFalse(){
+        r2.setName("Latte");
+        assertFalse(r1.equals(r2));
+    }
+
+    @Test // Testing
+   public void testEqualsGetClass() {
+
+        Inventory inv = new Inventory();
+        assertFalse(r1.equals(inv));
     }
 }
+
