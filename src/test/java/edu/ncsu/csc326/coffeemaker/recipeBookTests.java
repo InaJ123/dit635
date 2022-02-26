@@ -41,7 +41,14 @@ public class recipeBookTests {
 
 
     @Test
-    public void addRecipe() {
+    public void addRecipes() {
+        RecipeBook rb = new RecipeBook();
+        assertTrue(rb.addRecipe(r1));
+        assertTrue(rb.addRecipe(r2));
+    }
+
+    @Test
+    public void addSameRecipeTwice() {
         RecipeBook rb = new RecipeBook();
         assertTrue(rb.addRecipe(r1));
         assertFalse(rb.addRecipe(r1));
@@ -52,6 +59,16 @@ public class recipeBookTests {
         RecipeBook rb = new RecipeBook();
         assertTrue(rb.addRecipe(r1));
         assertEquals(1, rb.getRecipes().length);
+    }
+    @Test
+    public void deleteNullRecipe() {
+        RecipeBook rb = new RecipeBook();
+        assertNull(rb.deleteRecipe(0));
+    }
+    @Test
+    public void editNullRecipe() {
+        RecipeBook rb = new RecipeBook();
+        assertNull(rb.editRecipe(0, r1));
     }
 
     @Test
