@@ -5,7 +5,7 @@ public class RecipeBook {
 	/** Array of recipes in coffee maker*/
 	private Recipe [] recipeArray;
 	/** Number of recipes in coffee maker */
-	private final int NUM_RECIPES = 4;
+	private final int NUM_RECIPES = 4;  // mutation nr 3 constant for constant set value to -10
 
 	/**
 	 * Default constructor for a RecipeBook.
@@ -28,7 +28,7 @@ public class RecipeBook {
 		//find out otherwise
 		boolean exists = false;
 		//Check that recipe doesn't already exist in array
-		for (int i = 0; i != recipeArray.length; i++ ) { // equivalent mutant, changed < to !=
+		for (int i = 0; i < recipeArray.length; i++ ) { // equivalent mutant nr 4, changed < to !=
 			if (r.equals(recipeArray[i])) {
 				exists = true;
 			}

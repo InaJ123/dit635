@@ -66,7 +66,7 @@ public class CoffeeMaker {
 		inventory.addMilk(amtMilk);
 		inventory.addSugar(amtSugar);
 		inventory.addChocolate(amtChocolate);
-	} // For the invalid mutant we would delete this line "}" which is a statement deletion
+	} // For the mutant nr 1 we would delete this line "}" which is a statement deletion
     /**
      * Returns the inventory of the coffee maker
      * @return Inventory

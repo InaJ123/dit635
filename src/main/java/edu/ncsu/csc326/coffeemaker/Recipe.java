@@ -12,7 +12,7 @@ public class Recipe {
     private int amtMilk;
     private int amtSugar;
     private int amtChocolate;
-    
+
     /**
      * Creates a default recipe for the coffee maker.
      */
@@ -24,7 +24,7 @@ public class Recipe {
     	this.amtSugar = 0;
     	this.amtChocolate = 0;
     }
-    
+
     /**
 	 * @return   Returns the amtChocolate.
 	 */
@@ -32,7 +32,7 @@ public class Recipe {
 		return amtChocolate;
 	}
     /**
-	 * @param amtChocolate   The amtChocolate to set.
+	 * @paramamtChocolate   The amtChocolate to set.
 	 */
     public void setAmtChocolate(String chocolate) throws RecipeException {
     	int amtChocolate = 0;
@@ -54,7 +54,7 @@ public class Recipe {
 		return amtCoffee;
 	}
     /**
-	 * @param amtCoffee   The amtCoffee to set.
+	 * @paramamtCoffee   The amtCoffee to set.
 	 */
     public void setAmtCoffee(String coffee) throws RecipeException {
     	int amtCoffee = 0;
@@ -76,7 +76,7 @@ public class Recipe {
 		return amtMilk;
 	}
     /**
-	 * @param amtMilk   The amtMilk to set.
+	 * @paramamtMilk   The amtMilk to set.
 	 */
     public void setAmtMilk(String milk) throws RecipeException{
     	int amtMilk = 0;
@@ -98,7 +98,7 @@ public class Recipe {
 		return amtSugar;
 	}
     /**
-	 * @param amtSugar   The amtSugar to set.
+	 * @paramamtSugar   The amtSugar to set.
 	 */
     public void setAmtSugar(String sugar) throws RecipeException {
     	int amtSugar = 0;
@@ -148,8 +148,8 @@ public class Recipe {
 		} else {
 			throw new RecipeException("Price must be a positive integer");
 		}
-	} 
-    
+	}
+
     /**
      * Returns the name of the recipe.
      * @return String
