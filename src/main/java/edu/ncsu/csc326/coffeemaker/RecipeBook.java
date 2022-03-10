@@ -38,6 +38,10 @@ public class RecipeBook {
 		boolean added = false;
 		//Check for first empty spot in array
 		if (!exists) {
+			//TODO: Create mutant 5
+			/****
+			 * MUTANT 5 (useful): on line 45. Add || instead of && to recreate the mutant
+			 ****/
 			for (int i = 0; i < recipeArray.length && !added; i++) {
 				if (recipeArray[i] == null) {
 					recipeArray[i] = r;

@@ -192,6 +192,11 @@ public class Inventory {
      * @param r
      * @return boolean
      */
+	//TODO: Create mutant 2 (Valid-but-not-useful)
+	/****
+	 * MUTANT 2: In the second if statement "Inventory.milk < r.getAmtMilk()", change < to >
+	 * Note: Remember to remove other mutants before you run the program since they will affect the result.
+	 ****/
     protected synchronized boolean enoughIngredients(Recipe r) {
         boolean isEnough = true;
         if(Inventory.coffee < r.getAmtCoffee()) {
